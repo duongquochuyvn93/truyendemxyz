@@ -1,0 +1,15 @@
+# Credentials — không commit lên repo public
+.env
+scripts/.env
+config.local.py
+
+# Ảnh chụp màn hình tạm
+Screenshot_*.png
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Simply Static output (nếu export ra subfolder riêng)
+static-export/
