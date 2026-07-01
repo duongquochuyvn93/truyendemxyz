@@ -1,4 +1,4 @@
-# deploy.ps1 — Chạy sau khi Simply Static export xong
+# deploy.ps1 - Chay sau khi Simply Static export xong
 # Usage: .\scripts\deploy.ps1 [message]
 
 $msg = if ($args[0]) { $args[0] } else { "deploy: $(Get-Date -Format 'yyyy-MM-dd HH:mm')" }
@@ -9,7 +9,7 @@ git add -A
 git commit -m $msg
 if ($LASTEXITCODE -eq 0) {
     git push
-    Write-Host "✓ Deploy xong! Cloudflare dang build (~30s)..." -ForegroundColor Green
+    Write-Host "Deploy xong! Cloudflare dang build (~30s)..." -ForegroundColor Green
 } else {
     Write-Host "Khong co gi thay doi." -ForegroundColor Yellow
 }
