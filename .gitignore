@@ -3,8 +3,6 @@
 scripts/.env
 config.local.py
 
-# Ảnh chụp màn hình tạm
-Screenshot_*.png
 
 # Python cache
 __pycache__/
