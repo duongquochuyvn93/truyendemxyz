@@ -1,0 +1,8 @@
+.git/
+scripts/
+.claude/
+.gitignore
+wrangler.toml
+*.ps1
+*.py
+*.md
