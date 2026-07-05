@@ -11,3 +11,6 @@ __pycache__/
 
 # Simply Static output (nếu export ra subfolder riêng)
 static-export/
+
+# Bundle Gutenberg editor — Simply Static copy theo wp-includes nhưng không trang nào dùng (~29MB)
+wp-includes/js/dist/

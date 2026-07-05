@@ -1,4 +1,11 @@
 """
+DEPRECATED - KHONG DUNG NUA. Thay bang app story-gen tai E:\\story-gen.
+
+Script nay chen gate Shopee truc tiep vao content post (localStorage key
+'shopee_unlocked_<path>'), KHAC voi gate hien tai o template single-chuong.php
+(localStorage key 'shopee_gate_ok', TTL 24h). Neu chay lai se tao post co gate
+nhung cung xung dot voi gate cua template. Giu file chi de tham khao.
+
 Orchestrator: AI generate -> review -> keyword match -> Shopee gate -> WP post -> git push
 """
 

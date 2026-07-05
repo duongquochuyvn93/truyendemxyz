@@ -6,3 +6,6 @@ wrangler.toml
 *.ps1
 *.py
 *.md
+wp-includes/js/dist/
+lenhpuswweb.txt
+demo*.png

@@ -39,9 +39,9 @@ git push → Cloudflare Pages → truyendem.xyz
 
 ## Gate Shopee
 
-**Quy tắc:** Tất cả chương đều có gate. Chỉ cần click 1 lần/phiên duyệt web → toàn bộ chương trong session đó không hỏi lại. Đóng tab → phiên mới → gate hiện lại.
+**Quy tắc:** Tất cả chương đều có gate. Click 1 lần → unlock toàn site trong 24 giờ. Hết 24 giờ → gate hiện lại.
 
-**Kỹ thuật:** `sessionStorage` key `shopee_session_ok` (toàn site, tự xoá khi đóng tab).
+**Kỹ thuật:** `localStorage` key `shopee_gate_ok` lưu timestamp, TTL 24 giờ (xem `single-chuong.php`). Link Shopee lấy từ Google Sheet CSV theo thể loại (`td_get_shopee_link()` trong `functions.php`); không khớp keyword và không có dòng `default` → lấy link đầu bảng.
 
 **Flow:** Reader vào chương → thấy gate (icon túi Shopee + nút) → click → Shopee mở tab mới → 1 giây → nội dung chương hiện ra.
 
@@ -55,7 +55,9 @@ Settings → Deploy → Local Directory → `E:\taotruyen`
 
 1. Viết/sửa trong WP-Admin → Publish
 2. Simply Static → Generate
-3. Chạy `scripts\deploy.ps1` → git push → Cloudflare auto-deploy (~30s)
+3. Chạy `scripts\deploy.ps1` → git push + gọi deploy hook (đọc `CF_DEPLOY_HOOK` từ `scripts\.env`) → Cloudflare Workers build (~60s)
+
+Deploy chạy `npx wrangler deploy` với `wrangler.toml` (assets = toàn bộ repo, trừ các file trong `.assetsignore`). Giới hạn Workers: 25 MiB/file.
 
 ## Repo & Hosting
 
