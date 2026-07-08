@@ -9,3 +9,4 @@ wrangler.toml
 wp-includes/js/dist/
 lenhpuswweb.txt
 demo*.png
+worker.js

@@ -1,6 +1,12 @@
 name = "truyendemxyz"
+main = "worker.js"
 compatibility_date = "2024-09-23"
 
 [assets]
 directory = "./"
+binding = "ASSETS"
 not_found_handling = "404-page"
+
+[[kv_namespaces]]
+binding = "VIEWS"
+id = "fe9d4de56a604dada547bea4825a49c1"

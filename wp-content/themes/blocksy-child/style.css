@@ -171,7 +171,7 @@ body { background:#f5f5f5; color:var(--text); }
 .td-decu-meta { font-size:.72em; color:#aaa; margin-bottom:5px; }
 .td-decu-btn {
   display:inline-block; background:var(--brown); color:#fff;
-  font-size:.72em; padding:3px 10px; border-radius:4px;
+  font-size:.78em; padding:6px 12px; border-radius:4px;
   text-decoration:none; transition:background .15s;
 }
 .td-decu-btn:hover { background:var(--brown-dark); }
@@ -180,7 +180,7 @@ body { background:#f5f5f5; color:var(--text); }
    TRANG TRUYỆN (single-truyen)
 ════════════════════════════════════════ */
 .truyen-header { display:flex; gap:24px; margin-bottom:32px; flex-wrap:wrap; }
-.truyen-cover img { width:180px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15); }
+.truyen-cover img { width:180px; height:270px; object-fit:cover; display:block; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,.15); }
 .truyen-meta h1 { font-size:1.6em; color:var(--brown-dark); margin:0 0 12px; }
 .truyen-meta .badge {
   display:inline-block; background:var(--brown); color:#fff;
@@ -190,7 +190,7 @@ body { background:#f5f5f5; color:var(--text); }
 .chapter-list { list-style:none; padding:0; margin:0; }
 .chapter-list li { border-bottom:1px solid var(--border); }
 .chapter-list a {
-  display:flex; justify-content:space-between; padding:10px 4px;
+  display:flex; justify-content:space-between; align-items:center; padding:12px 4px;
   text-decoration:none; color:var(--brown-dark); font-size:.95em;
   transition:background .15s;
 }
@@ -225,7 +225,7 @@ body { background:#f5f5f5; color:var(--text); }
 }
 .chuong-nav { display:flex; justify-content:space-between; margin-top:32px; }
 .chuong-nav a {
-  background:var(--brown); color:#fff; padding:8px 20px; border-radius:6px;
+  background:var(--brown); color:#fff; padding:12px 20px; border-radius:6px;
   text-decoration:none; font-size:.9em;
 }
 .chuong-nav a:hover { background:var(--brown-dark); }
@@ -257,3 +257,9 @@ body { background:#f5f5f5; color:var(--text); }
   cursor:pointer; transition:background .2s;
 }
 #shopee-gate .gate-btn:hover { background:var(--brown-dark); }
+
+@media(max-width:480px) {
+  .chuong-wrap { padding:16px 12px 48px; }
+  .chuong-box  { padding:16px 16px 20px; }
+  #shopee-gate { padding:28px 20px; }
+}

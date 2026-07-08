@@ -54,10 +54,18 @@ Settings → Deploy → Local Directory → `E:\taotruyen`
 ## Deploy workflow
 
 1. Viết/sửa trong WP-Admin → Publish
-2. Simply Static → Generate
-3. Chạy `scripts\deploy.ps1` → git push + gọi deploy hook (đọc `CF_DEPLOY_HOOK` từ `scripts\.env`) → Cloudflare Workers build (~60s)
+2. Chạy `scripts\sync-views.ps1` — kéo lượt xem thật từ Cloudflare KV về ghi vào `luot_xem` trên WP (để "Truyện Hot" sort đúng)
+3. Simply Static → Generate
+4. Chạy `scripts\deploy.ps1` → git push + gọi deploy hook (đọc `CF_DEPLOY_HOOK` từ `scripts\.env`) → Cloudflare Workers build (~60s)
 
 Deploy chạy `npx wrangler deploy` với `wrangler.toml` (assets = toàn bộ repo, trừ các file trong `.assetsignore`). Giới hạn Workers: 25 MiB/file.
+
+## Lượt xem (luot_xem)
+
+- Truyện mới publish (WP-Admin hoặc qua story-gen) tự động random 10-500 (`save_post_truyen` hook trong `functions.php`), chỉ chạy 1 lần (đánh dấu bằng meta `_luot_xem_seeded`).
+- View thật: mỗi lần đọc 1 chương, JS trong `single-chuong.php` gọi `POST /api/views/{truyen_id}` (dedupe 24h/trình duyệt qua `localStorage`), tăng dần trong Cloudflare KV (binding `VIEWS`) qua `worker.js`.
+- `worker.js` (không commit lên git, có trong `.assetsignore`) xử lý route `/api/views/:id` (GET/POST) và `/api/views/export?secret=...` (rút cạn KV, trả về số view mới rồi xoá key) — bảo vệ bằng Worker secret `SYNC_SECRET` (cũng lưu ở `scripts/.env` biến `CF_SYNC_SECRET`).
+- `scripts\sync-views.ps1` gọi endpoint export rồi cộng dồn vào `luot_xem` hiện tại trên WP — đây là bước thủ công, cần chạy trước mỗi lần Simply Static Generate để số liệu khớp.
 
 ## Repo & Hosting
 
