@@ -1,6 +1,9 @@
 .git/
 scripts/
 .claude/
+.codex/
+.agents/
+.wrangler/
 .gitignore
 wrangler.toml
 *.ps1
@@ -10,3 +13,5 @@ wp-includes/js/dist/
 lenhpuswweb.txt
 demo*.png
 worker.js
+wp-content/uploads/2026/07/truyendem-logo-v2-source.png
+wp-content/uploads/2026/07/truyendem-logo-v2-preview.jpg

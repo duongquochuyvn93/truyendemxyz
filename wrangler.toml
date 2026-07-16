@@ -7,6 +7,10 @@ directory = "./"
 binding = "ASSETS"
 not_found_handling = "404-page"
 
-[[kv_namespaces]]
-binding = "VIEWS"
-id = "fe9d4de56a604dada547bea4825a49c1"
+[[durable_objects.bindings]]
+name = "VIEW_STORE"
+class_name = "ViewStore"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ViewStore"]

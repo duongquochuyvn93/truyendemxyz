@@ -63,9 +63,9 @@ Deploy chạy `npx wrangler deploy` với `wrangler.toml` (assets = toàn bộ r
 ## Lượt xem (luot_xem)
 
 - Truyện mới publish (WP-Admin hoặc qua story-gen) tự động random 10-500 (`save_post_truyen` hook trong `functions.php`), chỉ chạy 1 lần (đánh dấu bằng meta `_luot_xem_seeded`).
-- View thật: mỗi lần đọc 1 chương, JS trong `single-chuong.php` gọi `POST /api/views/{truyen_id}` (dedupe 24h/trình duyệt qua `localStorage`), tăng dần trong Cloudflare KV (binding `VIEWS`) qua `worker.js`.
-- `worker.js` (không commit lên git, có trong `.assetsignore`) xử lý route `/api/views/:id` (GET/POST) và `/api/views/export?secret=...` (rút cạn KV, trả về số view mới rồi xoá key) — bảo vệ bằng Worker secret `SYNC_SECRET` (cũng lưu ở `scripts/.env` biến `CF_SYNC_SECRET`).
-- `scripts\sync-views.ps1` gọi endpoint export rồi cộng dồn vào `luot_xem` hiện tại trên WP — đây là bước thủ công, cần chạy trước mỗi lần Simply Static Generate để số liệu khớp.
+- View thật: mỗi lần đọc 1 chương, JS trong `single-chuong.php` gọi `POST /api/views/{truyen_id}` (dedupe 24h/trình duyệt qua `localStorage`). `worker.js` chuyển request vào Durable Object `VIEW_STORE`, nơi tăng counter tuần tự để không mất lượt khi có request đồng thời.
+- Đồng bộ dùng batch: `POST /api/views/export` với `Authorization: Bearer <SYNC_SECRET>` tạo/lấy batch đang chờ; chỉ `POST /api/views/ack` sau khi WordPress cập nhật thành công mới xoá batch. Lượt phát sinh trong lúc sync nằm ở batch kế tiếp. `worker.js` phải được commit để Wrangler deploy, nhưng bị loại khỏi static assets trong `.assetsignore`.
+- `scripts\sync-views.ps1` lưu journal tạm `scripts\.sync-views-state.json` (gitignored) để chạy lại batch dở dang mà không cộng trùng. Chạy script trước Simply Static Generate để số liệu hiển thị khớp.
 
 ## Repo & Hosting
 

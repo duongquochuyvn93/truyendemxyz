@@ -2,6 +2,14 @@
 .env
 scripts/.env
 config.local.py
+.wrangler/
+.codex/
+.claude/
+.agents/
+.sync-views-state.json
+AGENTS.md
+wp-content/uploads/2026/07/truyendem-logo-v2-source.png
+wp-content/uploads/2026/07/truyendem-logo-v2-preview.jpg
 
 
 # Python cache
